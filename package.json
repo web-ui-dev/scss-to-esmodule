@@ -2,7 +2,7 @@
   "name": "@web-ui/scss-to-esmodule",
   "version": "0.1.1",
   "description": "Transpile .scss files, apply postcss plugins if defined and wrap the styles inside template literal string and export as ESM",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "test": "echo 'no tests!'",
     "build": ""
