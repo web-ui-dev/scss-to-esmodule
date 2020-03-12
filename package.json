@@ -1,0 +1,45 @@
+{
+  "name": "@web-ui/scss-to-esmodule",
+  "version": "0.1.0",
+  "description": "Transpile .scss files, apply postcss plugins if defined and wrap the styles inside template literal string and export as ESM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'no tests!'",
+    "build": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web-ui-dev/scss-to-esmodule.git"
+  },
+  "keywords": [
+    "scss-to-esmodule",
+    "WC",
+    "web",
+    "components"
+  ],
+  "author": "dsadhanala@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/web-ui-dev/scss-to-esmodule/issues"
+  },
+  "homepage": "https://github.com/web-ui-dev/scss-to-esmodule#readme",
+  "files": [
+    "src/**/*.js",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "await-to-js": "^2.1.1",
+    "chokidar": "^3.3.1",
+    "common-tags": "^1.8.0",
+    "glob": "^7.1.6",
+    "node-sass": "^4.13.1",
+    "optionator": "^0.8.3",
+    "postcss": "^7.0.27",
+    "postcss-load-config": "^2.1.0"
+  },
+  "bin": {
+    "scss-to-esmodule": "src/index.js"
+  }
+}
