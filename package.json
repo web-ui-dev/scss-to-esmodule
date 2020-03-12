@@ -29,6 +29,9 @@
     "package.json",
     "README.md"
   ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "dependencies": {
     "await-to-js": "^2.1.1",
     "chokidar": "^3.3.1",

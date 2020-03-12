@@ -1,3 +1,7 @@
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![license][license]][license-url]
+
 # @web-ui/scss-to-esmodule
 
 Transpile .scss files, apply postcss plugins if defined and wrap the styles inside template literal string and export as ESM.
@@ -29,3 +33,10 @@ Examples:
     scss-to-esmodule -f="input.scss" -w                             watch for file changes
 
 ```
+
+[npm]: https://img.shields.io/npm/v/@web-ui/scss-to-esmodule.svg
+[npm-url]: https://npmjs.com/package/@web-ui/scss-to-esmodule
+[node]: https://img.shields.io/node/v/@web-ui/scss-to-esmodule.svg
+[node-url]: https://nodejs.org/
+[license]: https://img.shields.io/npm/l/baseui-wc-base-component.svg
+[license-url]: https://opensource.org/licenses/MIT
