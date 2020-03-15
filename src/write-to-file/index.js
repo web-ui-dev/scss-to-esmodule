@@ -33,7 +33,7 @@ const writeToFile = async ({ file, moduleType, postcssPlugins, isSourcemapsEnabl
 
     // write js/ts file
     fs.writeFileSync(outputFilePath, wrapESModule(css, styleTemplate), writeFileCallback);
-    console.info(`------  styles to ${moduleType} module  with ${styleTemplate} complete :: ${outputFilePath}`);
+    console.info(`------  styles to ${moduleType} module with ${styleTemplate} complete :: ${outputFilePath}`);
 
     // skip writing sourcemaps file if sourcemaps not enabled
     if (!isSourcemapsEnabled || !map) return;
