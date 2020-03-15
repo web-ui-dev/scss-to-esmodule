@@ -14,8 +14,6 @@ const postcssProcess = async (cssContent, mapContent, filepath, postcssPlugins) 
     const postcssProcessOptions = {
         from: filepath,
         map: mapContent ? { inline: false } : false,
-        sourcesContent: true,
-        prev: mapContent
     };
 
     const [err, transformedCSS] = await to(postcss(postcssPlugins).process(cssContent, postcssProcessOptions));

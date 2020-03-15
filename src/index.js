@@ -7,23 +7,29 @@ const writeToFile = require("./write-to-file");
 const getPostCSSConfig = require("./postcss-process/get-postcss-config");
 
 // parsed arguments/options passed in via CLI from the user
-const { files, ignore, moduleType, watch, sourcemaps } = parseOptions(process.argv);
+const { files, ignore, moduleType, watch, sourcemaps, styleTemplate } = parseOptions(process.argv);
 
 if (!files) throw new Error('invalid files path!');
 
+const getPostcssPlugins = async () => {
+    const { postcssPlugins } = await getPostCSSConfig();
+    return postcssPlugins;
+};
 // iterate through given path
 glob(files, { nonull: true, ignore }, async (err, files) => {
-    const { postcssPlugins } = await getPostCSSConfig();
+    const postcssPlugins = await getPostcssPlugins();
 
     if (err) throw new Error(err);
 
-    for await (let file of files) writeToFile(file, moduleType, postcssPlugins, sourcemaps);
+    for await (let file of files) writeToFile({ file, moduleType, postcssPlugins, isSourcemapsEnabled: sourcemaps, styleTemplate });
 });
 
 if (!watch) return;
 
 // watch file changes in watch mode
-chokidar.watch(files, { ignored: ignore, persistent: true }).on('change', (file) => {
+chokidar.watch(files, { ignored: ignore, persistent: true }).on('change', async (file) => {
+    const postcssPlugins = await getPostcssPlugins();
+
     console.info('changed:', file);
-    writeToFile(file, moduleType, postcssPlugins, sourcemaps);
+    writeToFile({ file, moduleType, postcssPlugins, isSourcemapsEnabled: sourcemaps, styleTemplate });
 });

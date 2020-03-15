@@ -45,6 +45,13 @@ const parseOptions = optionator({
             type: 'Boolean',
             default: 'false',
             description: 'Generate external sourcemaps'
+        },
+        {
+            option: 'style-template',
+            alias: 't',
+            type: 'String',
+            default: 'native',
+            description: 'Choose which template styles should be exported with native or lit, ex: --style-template="lit'
         }
     ]
 });
