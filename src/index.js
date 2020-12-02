@@ -27,9 +27,9 @@ glob(files, { nonull: true, ignore }, async (err, files) => {
 if (!watch) return;
 
 // watch file changes in watch mode
-chokidar.watch(files, { ignored: ignore, persistent: true }).on('change', async (file) => {
+chokidar.watch(files, { ignored: ignore }).on('change', async (file, stats) => {
     const postcssPlugins = await getPostcssPlugins();
-
+    if (stats) console.log(`File ${file} changed size to ${stats.size}`);
     console.info('changed:', file);
     writeToFile({ file, moduleType, postcssPlugins, isSourcemapsEnabled: sourcemaps, styleTemplate });
 });

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const sass = require('node-sass');
+const packageImporter = require('node-sass-package-importer');
 const postcssProcess = require("../postcss-process");
 const wrapESModule = require("../wrap-esmodule");
 
@@ -23,7 +24,8 @@ const writeToFile = async ({ file, moduleType, postcssPlugins, isSourcemapsEnabl
         outputStyle: 'compressed',
         sourceMap: isSourcemapsEnabled,
         sourceMapContents: isSourcemapsEnabled,
-        omitSourceMapUrl: true
+        omitSourceMapUrl: true,
+        importer: packageImporter()
     };
 
     const sassRenderResults = sass.renderSync(sassRenderOptions);
