@@ -15,21 +15,21 @@ const getPostcssPlugins = async () => {
     const { postcssPlugins } = await getPostCSSConfig();
     return postcssPlugins;
 };
+
+const watchForChange = async (file) => {
+    console.info('changed:', file);
+    const postcssPlugins = await getPostcssPlugins();
+    writeToFile({ file, moduleType, postcssPlugins, isSourcemapsEnabled: sourcemaps, styleTemplate });
+}
+
 // iterate through given path
-glob(files, { nonull: true, ignore }, async (err, files) => {
+glob(files, { nonull: true, ignore }, async (err, filteredFiles) => {
     const postcssPlugins = await getPostcssPlugins();
 
     if (err) throw new Error(err);
+    for await (let file of filteredFiles) writeToFile({ file, moduleType, postcssPlugins, isSourcemapsEnabled: sourcemaps, styleTemplate });
 
-    for await (let file of files) writeToFile({ file, moduleType, postcssPlugins, isSourcemapsEnabled: sourcemaps, styleTemplate });
-});
-
-if (!watch) return;
-
-// watch file changes in watch mode
-chokidar.watch(files, { ignored: ignore }).on('change', async (file, stats) => {
-    const postcssPlugins = await getPostcssPlugins();
-    if (stats) console.log(`File ${file} changed size to ${stats.size}`);
-    console.info('changed:', file);
-    writeToFile({ file, moduleType, postcssPlugins, isSourcemapsEnabled: sourcemaps, styleTemplate });
+    // watch file changes in watch mode
+    if (!watch) return;
+    chokidar.watch(filteredFiles, { ignored: ignore }).on('change', watchForChange);
 });
